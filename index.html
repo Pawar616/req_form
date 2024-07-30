@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requirment Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-section {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #007bff;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-section">
+        <div class="container">
+            <div class="card-header bg-primary text-white text-center position-relative">
+               <a class="text-white" href="../index.html"> <i class="material-icons position-absolute" style="left: 10px; top: 50%; transform: translateY(-50%);">arrow_back</i></a>
+            <h3 class="text-center">Add Requirment</h3>
+                <!-- <i class="material-icons position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">person</i> -->
+            </div>
+        <h2 class="text-center"></h2>
+        <form id="req_form">
+            <div class="form-group">
+                <label for="name">Job Role</label>
+                <input type="text" class="form-control" id="jobRole" placeholder="Enter Job Role">
+            </div>
+
+            <div class="form-group">
+                <label for="id">Qulification</label>
+                <input type="text" class="form-control" id="qulification" placeholder="Enter Qulification">
+            </div>
+
+            <div class="form-group">
+                <label for="charge">Job Location </label>
+                <input type="text" class="form-control" id="place" placeholder="Enter Place name">
+            </div>
+
+
+            <div class="form-group">
+                <label for="pr"> Email Id</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter Email">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Last Date</label>
+                <input type="date" class="form-control" id="date">
+            </div>
+
+            <div class="form-group">
+                <label for="remark">Job Discription</label>
+                <textarea class="form-control" id="jobdisc" rows="4" placeholder="Enter Job Discription"></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('req_form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = {
+            name: document.getElementById('jobRole').value,
+            id: document.getElementById('qulification').value,
+            charge: document.getElementById('place').value,
+            // punishment: document.querySelector('input[name="punishment"]:checked')?.value || '',
+            pr: document.getElementById('email').value,
+            date: document.getElementById('date').value,
+            remark: document.getElementById('jobdisc').value
+        };
+
+        fetch('https://script.google.com/macros/s/AKfycbzv7_oDyRMMD4r2bWyCfkp8HJDa54RcpVl2BKgPRxnIGbXJCWPIaQYLGn5JYFum7sZnJA/exec', {
+            method: 'POST',
+            contentType: 'application/json',
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert('Form submitted successfully!');
+            document.getElementById('req_form').reset();
+        })
+        .catch(error => {
+            alert('Error submitting form: ' + error);
+        });
+    });
+</script>
+</body>
+</html>
