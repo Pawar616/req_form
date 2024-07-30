@@ -109,6 +109,13 @@
                             <p class="card-text"><strong>Email:</strong> ${item.pr}</p>
                             <p class="card-text"><strong>Last Date:</strong> ${formattedDate}</p>
                             <p class="card-text"><strong>Job Description:</strong> ${item.remark}</p>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(item.pr)}" 
+                               class="btn btn-primary" 
+                               target="_blank"
+                               data-toggle="tooltip" 
+                               title="Click here to send CV on this Email">
+                               Apply Now
+                            </a>
                         `;
 
                         cardInner.appendChild(cardBody);
@@ -119,6 +126,9 @@
                     // Hide the loading message
                     loading.classList.add("hidden");
                     button.classList.remove("hidden");
+
+                    // Initialize tooltips
+                    $('[data-toggle="tooltip"]').tooltip();
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
